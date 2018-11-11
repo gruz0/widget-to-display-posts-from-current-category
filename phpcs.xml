@@ -4,6 +4,7 @@
 	<config name="installed_paths" value="wpcs" />
 
 	<rule ref="WordPress-Core">
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
 	</rule>
 
 	<rule ref="WordPress-Docs">
