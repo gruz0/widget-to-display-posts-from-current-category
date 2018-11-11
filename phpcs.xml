@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ruleset name="Posts-in-Current-Category">
+	<description>A custom set of rules to check for a WPized WordPress project</description>
+	<config name="installed_paths" value="wpcs" />
+
+	<rule ref="WordPress-Core">
+	</rule>
+
+	<rule ref="WordPress-Docs">
+		<exclude name="Squiz.Commenting.FileComment.Missing" />
+		<exclude name="Squiz.Commenting.ClassComment.Missing" />
+		<exclude name="Squiz.Commenting.FunctionComment.Missing" />
+		<exclude name="Squiz.Commenting.FunctionComment.MissingParamTag" />
+	</rule>
+</ruleset>
