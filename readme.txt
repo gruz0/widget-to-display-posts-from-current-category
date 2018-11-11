@@ -18,7 +18,7 @@ You can find more detailed information about plugin on [GitHub](https://github.c
 == Installation ==
 
 1. Download the plugin from wordpress.org
-2. Upload it to your site (if you've installed it through Wordpress Admin Dashboard skip this step)
-3. Activate
-4. Appearence -> Widgets -> add the new widget
+2. Upload it to your site (if you've installed it through WordPress Admin Dashboard skip this step)
+3. Activate the plugin through "Plugins" menu in WordPress
+4. Go To "Appearance" -> "Widgets" -> Add the new widget
 5. Save & Enjoy!
