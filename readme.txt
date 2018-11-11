@@ -1,9 +1,9 @@
 === Widget to Display Posts from Current Category ===
-Contributors: gruz0
-Tags: post, widget, category, related
+Contributors: gruz0, rwky
+Tags: post, widget, category, related, same
 Requires at least: 3.6
-Tested up to: 3.8
-Stable tag: 0.1
+Tested up to: 4.9.8
+Stable tag: 0.2
 License: MIT
 License URI: https://github.com/gruz0/widget-to-display-posts-from-current-category/blob/master/LICENSE
 
@@ -17,6 +17,8 @@ You can find more detailed information about plugin on [GitHub](https://github.c
 
 == Installation ==
 
-1. Upload the entire `widget-to-display-posts-from-current-category` folder to the `/wp-content/plugins/` directory.
-1. Activate the plugin through the 'Plugins' menu in WordPress.
-
+1. Download the plugin from wordpress.org
+2. Upload it to your site (if you've installed it through Wordpress Admin Dashboard skip this step)
+3. Activate
+4. Appearence -> Widgets -> add the new widget
+5. Save & Enjoy!
