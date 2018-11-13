@@ -42,3 +42,14 @@ Expect a conversation regarding your pull request, questions, clarifications, an
 
 ## How to run plugin inside Docker environment
 
+Ensure that you have installed Docker and docker-compose in your Operating System.
+
+Then use following commands:
+
+1. `make dockerize` – to run WordPress instance on [http://localhost:8000/](http://localhost:8000/)
+2. `make shell` – to open `bash` inside Docker container
+
+## How to cleanup database
+
+Simply delete the `.data` directory from the root directory.
+
