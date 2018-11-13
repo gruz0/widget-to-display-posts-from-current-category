@@ -1,0 +1,28 @@
+version: '3'
+services:
+  db:
+    image: mariadb:10
+    volumes:
+      - "./.data/db:/var/lib/mysql"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+
+  wordpress:
+    depends_on:
+      - db
+    build:
+      context: .
+    links:
+      - db
+    ports:
+      - "8000:80"
+    volumes:
+      - ".:/var/www/html/wp-content/plugins/widget-to-display-posts-from-current-category/"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_PASSWORD: wordpress
