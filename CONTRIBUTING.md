@@ -53,3 +53,12 @@ Then use following commands:
 
 Simply delete the `.data` directory from the root directory.
 
+## How to activate Debug Mode
+
+Inside container run the script `/usr/local/bin/activate_debug`.
+
+## How to write debug logs
+
+Use custom function `write_log( $smth );` from the plugin
+and look at the `/wp-content/debug.log` inside the container.
+
