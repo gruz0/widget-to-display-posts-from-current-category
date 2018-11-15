@@ -1,15 +1,19 @@
 <?php
-// phpcs:disable Squiz.Commenting.DocCommentAlignment.SpaceBeforeStar,Squiz.Commenting.BlockComment.NoEmptyLineBefore
-/*
-Plugin Name: Widget to Display Posts from Current Category
-Description: The plugin allows you to display records from the current category in the sidebar
-Version:     0.2
-Author:      Alexander Kadyrov
-Author URI:  http://gruz0.ru/
-License:     MIT
-License URI: https://github.com/gruz0/widget-to-display-posts-from-current-category/blob/master/LICENSE
-*/
-// phpcs:enable
+/**
+ * Main file
+ *
+ * @link https://github.com/gruz0/widget-to-display-posts-from-current-category
+ * @since 0.1
+ * @package Display_Posts_From_Current_Category
+ *
+ * Plugin Name: Widget to Display Posts from Current Category
+ * Description: This plugin allows you to display posts from the current category in the sidebar
+ * Version:     0.2
+ * Author:      Alexander Kadyrov
+ * Author URI:  http://gruz0.ru/
+ * License:     MIT
+ * License URI: https://github.com/gruz0/widget-to-display-posts-from-current-category/blob/master/LICENSE
+ */
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
@@ -20,11 +24,14 @@ function gruz0_subcategories_load_widget() {
 add_action( 'widgets_init', 'gruz0_subcategories_load_widget' );
 
 class Display_Posts_From_Current_Category extends WP_Widget {
+	const POSTS_PER_PAGE    = 10;
+	const POST_TITLE_LENGTH = 30;
+
 	function __construct() {
 		parent::__construct(
 			'gruz0_posts_in_current_widget',
-			__( 'Current category records', 'gruz0_subcategories_widget_domain' ),
-			array( 'description' => 'Display current category description' )
+			__( 'Current Category Posts' ),
+			array( 'description' => __( 'Display posts from the current category' ) )
 		);
 	}
 
@@ -33,6 +40,7 @@ class Display_Posts_From_Current_Category extends WP_Widget {
 			return;
 		}
 
+		// @todo: Add validations for $instance values to prevent attack
 		if ( is_category() ) {
 			$title         = apply_filters( 'widget_title', $instance['category_title'] );
 			$subcategories = array();
@@ -56,6 +64,7 @@ class Display_Posts_From_Current_Category extends WP_Widget {
 		}
 
 		// @todo: Make order of posts variable
+		// @todo: Display posts randomly
 		$the_query = new WP_Query(
 			array(
 				'cat'            => $categories,
@@ -94,13 +103,13 @@ class Display_Posts_From_Current_Category extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		// Define defaults.
-		$category_title = isset( $instance['category_title'] ) ? $instance['category_title'] : __( 'From the same category', 'gruz0_subcategories_widget_domain' );
-		$single_title   = isset( $instance['single_title'] ) ? $instance['single_title'] : __( 'More posts from this section', 'gruz0_subcategories_widget_domain' );
-		$posts_per_page = isset( $instance['posts_per_page'] ) ? $instance['posts_per_page'] : 10;
-		$length         = isset( $instance['length'] ) ? $instance['length'] : 30;
+		$category_title = isset( $instance['category_title'] ) ? $instance['category_title'] : __( 'From the same category' );
+		$single_title   = isset( $instance['single_title'] ) ? $instance['single_title'] : __( 'More posts from this section' );
+		$posts_per_page = isset( $instance['posts_per_page'] ) ? absint( $instance['posts_per_page'] ) : self::POSTS_PER_PAGE;
+		$length         = isset( $instance['length'] ) ? absint( $instance['length'] ) : self::POST_TITLE_LENGTH;
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'category_title' ); ?>"><?php _e( 'Widget title' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'category_title' ); ?>"><?php _e( 'Category page widget title' ); ?>:</label>
 			<input
 				class="widefat" id="<?php echo $this->get_field_id( 'category_title' ); ?>"
 				name="<?php echo $this->get_field_name( 'category_title' ); ?>" type="text"
@@ -108,7 +117,7 @@ class Display_Posts_From_Current_Category extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'single_title' ); ?>"><?php _e( 'Single title:' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'single_title' ); ?>"><?php _e( 'Single post widget title' ); ?>:</label>
 			<input
 				class="widefat" id="<?php echo $this->get_field_id( 'single_title' ); ?>"
 				name="<?php echo $this->get_field_name( 'single_title' ); ?>" type="text"
@@ -116,7 +125,7 @@ class Display_Posts_From_Current_Category extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"><?php _e( 'Number of posts:' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"><?php _e( 'Number of posts to display' ); ?>:</label>
 			<input
 				class="widefat" id="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"
 				name="<?php echo $this->get_field_name( 'posts_per_page' ); ?>" type="text"
@@ -124,7 +133,7 @@ class Display_Posts_From_Current_Category extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'length' ); ?>"><?php _e( 'Character length:' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'length' ); ?>"><?php _e( 'Post title length' ); ?>:</label>
 			<input
 				class="widefat" id="<?php echo $this->get_field_id( 'length' ); ?>"
 				name="<?php echo $this->get_field_name( 'length' ); ?>" type="text"
@@ -138,10 +147,22 @@ class Display_Posts_From_Current_Category extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance                   = array();
-		$instance['category_title'] = ( ! empty( $new_instance['category_title'] ) ) ? strip_tags( $new_instance['category_title'] ) : '';
-		$instance['single_title']   = ( ! empty( $new_instance['single_title'] ) ) ? strip_tags( $new_instance['single_title'] ) : '';
-		$instance['posts_per_page'] = ( ! empty( $new_instance['posts_per_page'] ) ) ? intval( strip_tags( $new_instance['posts_per_page'] ) ) : '10';
-		$instance['length']         = ( ! empty( $new_instance['length'] ) ) ? intval( strip_tags( $new_instance['length'] ) ) : '30';
+		$instance['category_title'] = strip_tags( mb_trim( $new_instance['category_title'] ) );
+		$instance['single_title']   = strip_tags( mb_trim( $new_instance['single_title'] ) );
+
+		if ( empty( $new_instance['posts_per_page'] ) ) {
+			$instance['posts_per_page'] = self::POSTS_PER_PAGE;
+		} else {
+			$new_posts_per_page         = absint( strip_tags( $new_instance['posts_per_page'] ) );
+			$instance['posts_per_page'] = 0 === $new_posts_per_page ? self::POSTS_PER_PAGE : $new_posts_per_page;
+		}
+
+		if ( empty( $new_instance['length'] ) ) {
+			$instance['length'] = self::POST_TITLE_LENGTH;
+		} else {
+			$new_length         = absint( strip_tags( $new_instance['length'] ) );
+			$instance['length'] = 0 === $new_length ? self::POST_TITLE_LENGTH : $new_length;
+		}
 
 		return $instance;
 	}
@@ -154,3 +175,12 @@ if ( ! function_exists( 'mb_trim' ) ) {
 	}
 }
 
+if ( ! function_exists( 'write_log' ) ) {
+	function write_log( $log ) {
+		if ( is_array( $log ) || is_object( $log ) ) {
+			error_log( print_r( $log, true ) );
+		} else {
+			error_log( $log );
+		}
+	}
+}
