@@ -22,3 +22,8 @@ You can find more detailed information about plugin on [GitHub](https://github.c
 3. Activate the plugin through "Plugins" menu in WordPress
 4. Go To "Appearance" -> "Widgets" -> Add the new widget "Current Category Posts"
 5. Save & Enjoy!
+
+== Screenshots ==
+1. assets/screenshots/screenshot-1.png
+2. assets/screenshots/screenshot-2.png
+3. assets/screenshots/screenshot-3.png
