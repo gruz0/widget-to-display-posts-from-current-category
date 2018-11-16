@@ -24,6 +24,10 @@ You can find more detailed information about plugin on [GitHub](https://github.c
 5. Save & Enjoy!
 
 == Screenshots ==
-1. assets/screenshots/screenshot-1.png
-2. assets/screenshots/screenshot-2.png
-3. assets/screenshots/screenshot-3.png
+1. Widget settings
+2. Category page widget
+3. Single post widget
+
+== Donations ===
+
+[PayPal](https://paypal.me/gruz0)
