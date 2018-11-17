@@ -7,6 +7,7 @@ Description: This plugin allows you to display posts from the current category i
 Version: 0.2
 Author: Alexander Kadyrov
 Author URI: http://gruz0.ru/
+Text Domain: widget-to-show-posts-in-current-category
 License: MIT
 License URI: https://github.com/gruz0/widget-to-display-posts-from-current-category/blob/master/LICENSE
 */
@@ -28,8 +29,8 @@ class Display_Posts_From_Current_Category extends WP_Widget {
 	function __construct() {
 		parent::__construct(
 			'gruz0_posts_in_current_widget',
-			__( 'Current Category Posts' ),
-			array( 'description' => __( 'Display posts from the current category' ) )
+			__( 'Current Category Posts', 'widget-to-show-posts-in-current-category' ),
+			array( 'description' => __( 'Display posts from the current category', 'widget-to-show-posts-in-current-category' ) )
 		);
 	}
 
@@ -101,13 +102,13 @@ class Display_Posts_From_Current_Category extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		// Define defaults.
-		$category_title = isset( $instance['category_title'] ) ? $instance['category_title'] : __( 'From the same category' );
-		$single_title   = isset( $instance['single_title'] ) ? $instance['single_title'] : __( 'More posts from this section' );
+		$category_title = isset( $instance['category_title'] ) ? $instance['category_title'] : __( 'From the same category', 'widget-to-show-posts-in-current-category' );
+		$single_title   = isset( $instance['single_title'] ) ? $instance['single_title'] : __( 'More posts from this section', 'widget-to-show-posts-in-current-category' );
 		$posts_per_page = isset( $instance['posts_per_page'] ) ? absint( $instance['posts_per_page'] ) : self::POSTS_PER_PAGE;
 		$length         = isset( $instance['length'] ) ? absint( $instance['length'] ) : self::POST_TITLE_LENGTH;
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'category_title' ); ?>"><?php _e( 'Category page widget title' ); ?>:</label>
+			<label for="<?php echo $this->get_field_id( 'category_title' ); ?>"><?php _e( 'Category page widget title', 'widget-to-show-posts-in-current-category' ); ?>:</label>
 			<input
 				class="widefat" id="<?php echo $this->get_field_id( 'category_title' ); ?>"
 				name="<?php echo $this->get_field_name( 'category_title' ); ?>" type="text"
@@ -115,7 +116,7 @@ class Display_Posts_From_Current_Category extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'single_title' ); ?>"><?php _e( 'Single post widget title' ); ?>:</label>
+			<label for="<?php echo $this->get_field_id( 'single_title' ); ?>"><?php _e( 'Single post widget title', 'widget-to-show-posts-in-current-category' ); ?>:</label>
 			<input
 				class="widefat" id="<?php echo $this->get_field_id( 'single_title' ); ?>"
 				name="<?php echo $this->get_field_name( 'single_title' ); ?>" type="text"
@@ -123,7 +124,7 @@ class Display_Posts_From_Current_Category extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"><?php _e( 'Number of posts to display' ); ?>:</label>
+			<label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"><?php _e( 'Number of posts to display', 'widget-to-show-posts-in-current-category' ); ?>:</label>
 			<input
 				class="widefat" id="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"
 				name="<?php echo $this->get_field_name( 'posts_per_page' ); ?>" type="text"
@@ -131,7 +132,7 @@ class Display_Posts_From_Current_Category extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'length' ); ?>"><?php _e( 'Post title length' ); ?>:</label>
+			<label for="<?php echo $this->get_field_id( 'length' ); ?>"><?php _e( 'Post title length', 'widget-to-show-posts-in-current-category' ); ?>:</label>
 			<input
 				class="widefat" id="<?php echo $this->get_field_id( 'length' ); ?>"
 				name="<?php echo $this->get_field_name( 'length' ); ?>" type="text"
