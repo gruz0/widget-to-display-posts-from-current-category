@@ -62,3 +62,33 @@ Inside container run the script `/usr/local/bin/activate_debug`.
 Use custom function `write_log( $smth );` from the plugin
 and look at the `/wp-content/debug.log` inside the container.
 
+## How to install linters locally
+
+Run `make install_linters` inside repo's directory.
+
+What it does:
+
+1. Install [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) to `phpcs` directory
+2. Install [WordPress Coding Standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) to `wpcs` directory
+3. Install `bin/pre-commit` Git hook to `.git/hooks/pre-commit`.
+
+On each `git commit` command `phpcs` will started automatically! :-)
+
+Report's example output:
+
+```bash
+$ git commit
+[PHP Style][Info]: Checking PHP Style
+
+FILE: ...rrent-category/widget-to-display-posts-from-current-category.php
+----------------------------------------------------------------------
+FOUND 1 ERROR AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 3 | ERROR | You must use "/**" style comments for a file comment
+   |       | (Squiz.Commenting.FileComment.WrongStyle)
+----------------------------------------------------------------------
+
+Time: 165ms; Memory: 8Mb
+
+[PHP Style][Error]: Fix the issues and commit again
+```

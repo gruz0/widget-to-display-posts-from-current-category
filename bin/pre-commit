@@ -1,0 +1,17 @@
+#!/bin/bash
+
+red='\033[0;31m'
+green='\033[0;32m'
+yellow='\033[0;33m'
+NC='\033[0m'
+
+echo -e "${green}[PHP Style][Info]: Checking PHP Style${NC}"
+
+php phpcs/bin/phpcs --colors --standard=phpcs.xml --ignore=phpcs,wpcs,svn -s .
+
+if [ $? -ne 0 ]; then
+echo -e "${red}[PHP Style][Error]: Fix the issues and commit again${NC}"
+exit 1
+fi
+
+exit 0
