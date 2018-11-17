@@ -1,5 +1,7 @@
 # WordPress Widget to Display Posts from Current Category
 
+[![Build Status](https://travis-ci.org/gruz0/widget-to-display-posts-from-current-category.svg?branch=master)](https://travis-ci.org/gruz0/widget-to-display-posts-from-current-category)
+
 ## Screenshots
 
 | Widget settings |
