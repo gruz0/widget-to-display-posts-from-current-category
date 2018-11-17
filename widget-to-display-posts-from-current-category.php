@@ -1,19 +1,17 @@
 <?php
-/**
- * Main file
- *
- * @link https://github.com/gruz0/widget-to-display-posts-from-current-category
- * @since 0.1
- * @package Display_Posts_From_Current_Category
- *
- * Plugin Name: Widget to Display Posts from Current Category
- * Description: This plugin allows you to display posts from the current category in the sidebar
- * Version:     0.2
- * Author:      Alexander Kadyrov
- * Author URI:  http://gruz0.ru/
- * License:     MIT
- * License URI: https://github.com/gruz0/widget-to-display-posts-from-current-category/blob/master/LICENSE
- */
+// phpcs:disable Squiz.Commenting.FileComment.WrongStyle
+
+/*
+Plugin Name: Widget to Display Posts from Current Category
+Description: This plugin allows you to display posts from the current category in the sidebar
+Version: 0.2
+Author: Alexander Kadyrov
+Author URI: http://gruz0.ru/
+License: MIT
+License URI: https://github.com/gruz0/widget-to-display-posts-from-current-category/blob/master/LICENSE
+*/
+
+// phpcs:enable Squiz.Commenting.FileComment.WrongStyle
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
