@@ -2,7 +2,7 @@
 Contributors: gruz0, rwky
 Tags: post, widget, category, related, same
 Requires at least: 4.6
-Tested up to: 4.9.8
+Tested up to: 5.2
 Stable tag: 0.2
 License: MIT
 License URI: https://github.com/gruz0/widget-to-display-posts-from-current-category/blob/master/LICENSE
